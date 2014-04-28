@@ -7,6 +7,9 @@
 - name: get old /usr/local
   copy: src=/usr/local/ dest={{ brew_repo_path }} force=no
 
+- name: fix user acls
+  command: chmod -R +x {{ brew_repo_path }}/bin
+
 - name: clean up /usr/local
   sudo: True
   command: rm -rf /usr/local
