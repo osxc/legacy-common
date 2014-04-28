@@ -1,5 +1,5 @@
 ---
-# installs and configures git
+# configures git
 
 - name: configure name
   command: git config --global user.name "{{ git_user_name }}"
