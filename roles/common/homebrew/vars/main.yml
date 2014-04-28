@@ -1,0 +1,4 @@
+---
+vars:
+  brew_repo_path: ~/src/github.com/mxcl/homebrew
+  brew_install_path: /usr/local

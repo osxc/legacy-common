@@ -1,0 +1,13 @@
+---
+- name: Check for the existence of the homebrew repo
+  command: test -d {{ brew_repo_path }}
+  ignore_errors: yes
+  register: brew_presence
+- name: Create directory for homebrew
+  file: path={{ brew_repo_path }} recurse=yes state=directory
+- name: Clone with homebrew tarball
+  command: curl -L https://github.com/mxcl/homebrew/tarball/master | tar --strip-components=1 -zx -C {{ brew_repo_path }}
+  when: brew_presence|failed
+- name: Link the repo to the brew installation path
+  sudo: yes
+  file: state=link src={{ brew_repo_path }} dest={{ brew_install_path }} owner={{ ansible_user_id }}
