@@ -1,11 +1,11 @@
 ---
 # installs homebrew system-wide
 
-- name: get old /usr/local
-  copy: src=/usr/local/ dest={{ brew_repo_path }} force=no
-
 - name: clone homebrew
   git: repo=https://github.com/Homebrew/homebrew.git dest={{ brew_repo_path }}
+
+- name: get old /usr/local
+  copy: src=/usr/local/ dest={{ brew_repo_path }} force=no
 
 - name: clean up /usr/local
   sudo: True
