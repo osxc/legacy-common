@@ -5,9 +5,11 @@
   git: repo=https://github.com/Homebrew/homebrew.git dest={{ brew_repo_path }}
 
 - name: move pip and ansible to the homebrew repo
+  sudo: True
   command: mv /usr/local/bin/* {{ brew_repo_path }}/bin/
 
 - name: clean up /usr/local
+  sudo: True
   command: rm -rf /usr/local
 
 - name: link the repo to the brew installation path
