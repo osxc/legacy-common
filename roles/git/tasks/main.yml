@@ -6,3 +6,6 @@
 
 - name: configure email
   command: git config --global user.email "{{ git_user_email }}"
+
+- name: configure push
+  command: git config --global push.default simple
