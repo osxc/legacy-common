@@ -12,5 +12,6 @@
   command: rm -rf /usr/local
 
 - name: link the repo to the brew installation path
+  sudo: True
   file: state=link src={{ brew_repo_path }} dest={{ brew_install_path }} owner={{ ansible_user_id }}
   when: brew_repo_path != brew_install_path
