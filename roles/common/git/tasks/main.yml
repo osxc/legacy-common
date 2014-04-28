@@ -1,0 +1,11 @@
+---
+# installs and configures git
+
+- name: install git with homebrew
+  homebrew: name=git state=latest update_homebrew=yes
+
+- name: configure name
+  command: git config --global user.name "{{ git_user_name }}"
+
+- name: configure email
+  command: git config --global user.email "{{ git_user_email }}"
