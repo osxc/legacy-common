@@ -1,4 +1,6 @@
 ---
-vars:
-  brew_repo_path: ~/src/github.com/mxcl/homebrew
-  brew_install_path: /usr/local
+# variables precising where to install homebrew
+
+brew_repo_path: "~/src/github.com/mxcl/homebrew"
+
+brew_install_path: "/usr/local"
