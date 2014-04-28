@@ -1,0 +1,5 @@
+---
+# installs an arbitrary homebrew cask package
+
+- name: install {{ package_name }}
+  homebrew_cask: name={{ package_name }} state=present
