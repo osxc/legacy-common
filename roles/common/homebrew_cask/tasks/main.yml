@@ -1,0 +1,8 @@
+---
+# install homebrew cask for gui programs
+
+- name: tap the cask repository
+  homebrew_tap: tap=phinze/cask state=present
+
+- name: install brew-cask
+  homebrew: name=brew-cask state=latest update_homebrew=yes
