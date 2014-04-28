@@ -1,8 +1,11 @@
 ---
 # install homebrew cask for gui programs
 
+
 - name: tap the cask repository
-  homebrew_tap: tap=phinze/cask state=present
+  command: brew tap phinze/cask
+# As soon as ansible 1.6 pops up, change to this :
+#  homebrew_tap: tap=phinze/cask state=present
 
 - name: install brew-cask
   homebrew: name=brew-cask state=latest update_homebrew=yes
