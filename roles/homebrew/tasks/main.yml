@@ -1,17 +1,9 @@
 ---
 # installs homebrew system-wide
 
-- name: check for the existence of the homebrew repo
-  command: test -d {{ brew_repo_path }}
-  ignore_errors: yes
-  register: brew_presence
-
-- name: create directory for homebrew
-  file: path={{ brew_repo_path }} recurse=yes state=directory
-
-- name: clone with homebrew tarball
-  command: "curl -L https://github.com/mxcl/homebrew/tarball/master | tar --strip-components=1 -zx -C {{ brew_repo_path }}"
-  when: brew_presence|failed
+- name: clone homebrew
+  git: repo=https://github.com/Homebrew/homebrew.git dest={{ brew_repo_path }}
 
 - name: link the repo to the brew installation path
   file: state=link src={{ brew_repo_path }} dest={{ brew_install_path }} owner={{ ansible_user_id }}
+  when: brew_repo_path != brew_install_path
