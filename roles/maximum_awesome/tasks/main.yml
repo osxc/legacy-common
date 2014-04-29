@@ -1,0 +1,5 @@
+---
+# bind maximum awesome to the world !
+
+- name: bind maximum awesome
+  command: rake chdir=~/src/github.com/square/maximum-awesome creates=~/.vimrc.local
