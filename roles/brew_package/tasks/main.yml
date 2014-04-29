@@ -1,5 +1,9 @@
 ---
 # installs an arbitrary homebrew package
 
+- name: tap a repo
+  homebrew_tap: tap={{ tap }} state=present
+  when: tap is defined
+
 - name: install {{ package_name }}
   homebrew: name={{ package_name }} state=latest update_homebrew=yes
