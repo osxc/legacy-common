@@ -10,7 +10,7 @@
   file: path=~/.zshenv state=touch
 
 - name: add shim to bash
-  lineinfile: dest=~/.bash_profile regexp="^eval " line="eval \"$(rbenv init -)\"" state=present
+  lineinfile: dest=~/.bash_profile regexp="rbenv" line="eval \"$(rbenv init -)\"" state=present
 
 - name: add shim to zsh
-  lineinfile: dest=~/.zshenv regexp="^eval " line="eval \"$(rbenv init -)\"" state=present
+  lineinfile: dest=~/.zshenv regexp="rbenv" line="eval \"$(rbenv init -)\"" state=present
