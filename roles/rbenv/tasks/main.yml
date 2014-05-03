@@ -1,4 +1,14 @@
 ---
+# ensure a good build environment
+- name: uninstall readline
+  command: brew uninstall readline
+
+- name: install a ruby-build compatible readline version
+  command: brew install https://raw.githubusercontent.com/Homebrew/homebrew/0181c8a1633353affefabe257c170edbd6d7c008/Library/Formula/readline.rb
+
+- name: pin readline version
+  command: brew pin readline
+
 # shim rbenv
 
 - name: ensure bash_profile presence
@@ -14,3 +24,9 @@
 
 - name: add shim to zsh
   lineinfile: dest=~/.zshenv regexp="rbenv" line="eval \"$(rbenv init -)\"" state=present
+
+# install base version
+
+- name: install and build rubies
+  command: rbenv install {{ item }}
+  with_items: rubies
