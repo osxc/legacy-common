@@ -1,0 +1,3 @@
+---
+- name: install {{ package_name }}
+  npm: name={{ package_name }} global=yes state=latest

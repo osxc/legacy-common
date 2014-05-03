@@ -1,0 +1,3 @@
+---
+- name: install {{ package_name }}
+  gem: name={{ package_name }} state=latest

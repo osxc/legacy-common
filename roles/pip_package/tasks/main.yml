@@ -1,0 +1,3 @@
+---
+- name: install {{ package_name }}
+  pip: name={{ package_name }} state=latest
