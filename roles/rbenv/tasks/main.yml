@@ -30,3 +30,7 @@
 - name: install and build rubies
   command: rbenv install {{ item }}
   with_items: rubies
+
+# set the global
+- name: set {{ global }} as global ruby
+  command: rbenv global {{ global }}
