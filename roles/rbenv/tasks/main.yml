@@ -1,6 +1,7 @@
 ---
 # ensure a good build environment
 - name: uninstall readline
+  ignore_errors: True
   command: brew uninstall readline
 
 - name: install a ruby-build compatible readline version
