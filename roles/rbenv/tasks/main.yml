@@ -27,10 +27,13 @@
   lineinfile: dest=~/.zshenv regexp="rbenv" line="eval \"$(rbenv init -)\"" state=present
 
 # install base version
+- shell: rbenv versions
+  register: installed_rbenv_versions
 
 - name: install and build rubies
   command: rbenv install {{ item }}
   with_items: rubies
+  when: installed_rbenv_versions.stdout.find("  " + item) == -1
 
 # set the global
 - name: set {{ global }} as global ruby
