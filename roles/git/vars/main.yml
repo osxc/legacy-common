@@ -1,6 +1,6 @@
 ---
 # defaults for git: **must be overridden** !!!
 
-git_user_name: Bob Example
+git_user_name: Pierre Baillet
 
-git_user_mail: bob@example.com
+git_user_mail: oct@zoy.org
