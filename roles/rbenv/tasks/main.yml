@@ -30,10 +30,14 @@
 - shell: rbenv versions
   register: installed_rbenv_versions
 
+# installed versions show as :
+# ^  version-name
+# or when selected
+# ^* version-name
 - name: install and build rubies
   command: rbenv install {{ item }}
   with_items: rubies
-  when: installed_rbenv_versions.stdout.find("  " + item) == -1
+  when: installed_rbenv_versions.stdout.find(" " + item) == -1
 
 # set the global
 - name: set {{ global }} as global ruby
