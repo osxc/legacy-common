@@ -29,7 +29,7 @@
 # install base version
 
 - name: install and build rubies
-  command: rbenv install {{ item }}
+  command: rbenv install -s {{ item }}
   with_items: rubies
 
 # set the global
