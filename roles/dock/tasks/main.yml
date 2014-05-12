@@ -2,17 +2,17 @@
 # manage dock
 
 - name: clean dock
-  command: "{{ dockutil_exe }} --remove all creates=~/.managed-dock"
+  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --remove all creates=~/.managed-dock"
 
 - name: flag managed dock
   file: path=~/.managed-dock state=touch
 
 - name: add apps
-  command: "{{ dockutil_exe }} --add {{ item }}"
+  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --add {{ item }}"
   ignore_errors: True
   with_items: apps
 
 - name: add folders
-  command: "{{ dockutil_exe }} --add {{ item.path }} --view {{ item.view|default('grid') }} --display {{ item.display|default('folder') }} --sort {{ item.sort|default('name') }}"
+  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --add {{ item.path }} --view {{ item.view|default('grid') }} --display {{ item.display|default('folder') }} --sort {{ item.sort|default('name') }}"
   ignore_errors: True
   with_items: folders
