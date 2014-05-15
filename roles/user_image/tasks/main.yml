@@ -1,20 +1,35 @@
 ---
+# before we do anything, make sure user_image is actually present otherwise we're wasting our time
+- name: Checking for user_image
+  stat: "path={{ ansible_env.PWD }}/{{ image_name }} follow=true"
+  register: image_present
+
+- name: Warning No user_image Present
+  debug: "msg='{{ ansible_env.PWD }}/{{ image_name }} not present, User Image change not attempted.'"
+  when: image_present.stat.exists == False
+
 # dump the current user image, notify the user, and then remove it
 - name: Backing Up Current Image
-  shell: "dscl . read /Users/{{ ansible_env.USER }} JPEGPhoto | tail +2 | xxd -r -p > /Users/{{ ansible_env.USER }}/Pictures/{{ ansible_env.USER}}_backup.jpg"
+  shell: "/usr/bin/dscl . read /Users/{{ ansible_env.USER }} JPEGPhoto | /usr/bin/tail -1 | /usr/bin/xxd -r -p > /Users/{{ ansible_env.USER }}/Pictures/{{ ansible_env.USER}}_backup.jpg"
+  when: image_present.stat.exists == True
 
-- name: Notify User of Backed Up Image
+- name: Notifying User of Backed Up Image
   debug: "msg='Your existing User Image was backed up to: /Users/{{ ansible_env.USER }}/Pictures/{{ ansible_env.USER}}_backup.jpg'"
+  when: image_present.stat.exists == True
 
 - name: Deleting Existing Image
-  command: "dscl . delete /Users/{{ ansible_env.USER }} JPEGPhoto"
+  command: "/usr/bin/dscl . delete /Users/{{ ansible_env.USER }} JPEGPhoto"
+  when: image_present.stat.exists == True
 
 # prepare user_image.txt and jpg, then dsimport and show it off
-- name: Copy User Image Template
+- name: Copying User Image Template
   template: "src=user_image.txt dest=/tmp/{{ ansible_env.USER }}.txt"
+  when: image_present.stat.exists == True
 
 - name: Importing User Image via Import File
-  command: "dsimport /tmp/{{ ansible_env.USER }}.txt /Local/Default M"
+  command: "/usr/bin/dsimport /tmp/{{ ansible_env.USER }}.txt /Local/Default M"
+  when: image_present.stat.exists == True
 
 - name: "Opening Users & Group System Pref"
-  command: open /System/Library/PreferencePanes/Accounts.prefpane
+  command: /usr/bin/open /System/Library/PreferencePanes/Accounts.prefpane
+  when: image_present.stat.exists == True
