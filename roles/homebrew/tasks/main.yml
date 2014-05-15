@@ -2,7 +2,7 @@
 # installs homebrew system-wide
 
 - name: clone homebrew
-  git: repo=https://github.com/Homebrew/homebrew.git dest={{ brew_repo_path }}
+  git: repo=https://github.com/Homebrew/homebrew.git dest={{ brew_repo_path }} update=no
 
 - name: assert new homebrew installation
   command: test -e /usr/local/bin/brew
@@ -26,3 +26,6 @@
   sudo: True
   file: state=link src={{ brew_repo_path }} dest={{ brew_install_path }} owner={{ ansible_user_id }}
   when: brew_installed|failed
+
+- name: update homebrew
+  homebrew: update_homebrew=yes
