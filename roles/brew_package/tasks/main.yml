@@ -6,4 +6,4 @@
   when: tap is defined
 
 - name: install {{ package_name }}
-  homebrew: name={{ package_name }} state=latest update_homebrew=yes
+  homebrew: name={{ package_name }} state=latest update_homebrew=no
