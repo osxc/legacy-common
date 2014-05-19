@@ -9,16 +9,30 @@
 
 # change install path
 
-- name: ensure bash_profile presence
+# check for and update shell's dotfile by order of precedence.
+- name: add homebrew_cask_opts to the correct dotfile
   ignore_errors: True
-  file: path=~/.bash_profile state=touch
+  lineinfile: "dest={{ item }} regexp='^export HOMEBREW_CASK_OPTS' line='export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\"' state=present backup=yes"
+  with_first_found:
+    - files:
+        - ~/.bash_profile
+        - ~/.bash_login
+  register: bash_done
 
-- name: ensure zshenv presence
-  ignore_errors: True
-  file: path=~/.zshenv state=touch
+# we *could* just add ~/.zshenv to above but what if a bash user has .zshenv present?
+# the previous code would force its creation as well as .bash_profile for a zsh user
+# so having this seems more complete than taking the easy way out.
 
-- name: add opts to bash
-  lineinfile: dest=~/.bash_profile regexp="^export HOMEBREW_CASK_OPTS" line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\"" state=present
+# check for .zshenv and add the install path if that's found
+- name: check for .zshenv presence
+  stat: path=~/.zshenv follow=True
+  register: zshenv_present
 
-- name: add opts to zsh
-  lineinfile: dest=~/.zshenv regexp="^export HOMEBREW_CASK_OPTS" line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\"" state=present
+- name: add homebrew_cask_opts to .zshenv if present
+  lineinfile: dest=~/.zshenv regexp="^export HOMEBREW_CASK_OPTS" line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\" state=present backup=yes
+  when: zshenv_present.stat.exists == True
+
+# ensure .profile is present at minimum, or update if it exists, when the above fails
+- name: create .profile or update if it exists with homebrew_cask_opts
+  lineinfile: dest=~/.profile regexp="^export HOMEBREW_CASK_OPTS" line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\"" state=present create=yes
+  when: bash_done|failed and zshenv_present.stat.exists == False
