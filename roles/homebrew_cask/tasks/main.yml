@@ -29,7 +29,7 @@
   register: zshenv_present
 
 - name: add homebrew_cask_opts to .zshenv if present
-  lineinfile: dest=~/.zshenv regexp="^export HOMEBREW_CASK_OPTS" line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\" state=present backup=yes
+  lineinfile: dest=~/.zshenv regexp="^export HOMEBREW_CASK_OPTS" line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\"" state=present backup=yes
   when: zshenv_present.stat.exists == True
 
 # ensure .profile is present at minimum, or update if it exists, when the above fails
