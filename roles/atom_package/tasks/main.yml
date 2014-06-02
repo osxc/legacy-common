@@ -2,4 +2,4 @@
 # install atom plugin
 
 - name: install {{package_name}}
-  shell: /Applications/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm install {{ package_name }}
+  shell: /Applications/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm install {{ package_name }} creates=~/.atom/packages/{{package_name}}
