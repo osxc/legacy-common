@@ -2,5 +2,6 @@
 dependencies:
   - role: brew_package
     package_name: rbenv
+  - role: rbenv
   - role: brew_package
     package_name: ruby-build
