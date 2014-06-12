@@ -1,0 +1,5 @@
+---
+# Installs a gem into the correct rbenv'd ruby by using a login shell around the command. See:
+#   https://stackoverflow.com/questions/22115936/install-bundler-gem-using-ansible/22121802#22121802
+- name: install {{ package_name }}
+  command: bash -lc "gem install {{ package_name }}"
