@@ -58,7 +58,7 @@
 # setup_vundle
 - name: setup vundle
   command: >
-          vim -u "~/.vimrc.bundles"
+          vim -u "~/.spf13-vim-3/.vimrc.bundles.default"
           "+set nomore"
           +BundleInstall!
           +BundleClean
