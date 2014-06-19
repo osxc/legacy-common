@@ -9,17 +9,17 @@
 
 # do_backup
 - name: backup .vim
-  command: mv ~/.vim ~/.vim.$(date +%Y%m%d_%s)
+  shell: mv ~/.vim ~/.vim.$(date +%Y%m%d_%s)
   ignore_errors: True
   when: spf13_bound|failed
 
 - name: backup .vimrc
-  command: mv ~/.vimrc ~/.vimrc.$(date +%Y%m%d_%s)
+  shell: mv ~/.vimrc ~/.vimrc.$(date +%Y%m%d_%s)
   ignore_errors: True
   when: spf13_bound|failed
 
 - name: backup .gvimrc
-  command: mv ~/.gvimrc ~/.gvimrc.$(date +%Y%m%d_%s)
+  shell: mv ~/.gvimrc ~/.gvimrc.$(date +%Y%m%d_%s)
   ignore_errors: True
   when: spf13_bound|failed
 
@@ -58,7 +58,7 @@
 # setup_vundle
 - name: setup vundle
   command: >
-          vim -u "~/.vimrc.bundles"
+          vim -u "~/.spf13-vim-3/.vimrc.bundles.default"
           "+set nomore"
           +BundleInstall!
           +BundleClean
