@@ -7,3 +7,8 @@
 
 - name: install {{ package_name }}
   homebrew: name={{ package_name }} state=latest update_homebrew=no
+  when: brew_opts is not defined
+
+- name: install {{ package_name }} with {{ brew_opts }}
+  homebrew: name={{ package_name }} install_options={{ brew_opts }} state=latest update_homebrew=no
+  when: brew_opts is defined
