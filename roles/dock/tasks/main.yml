@@ -8,11 +8,11 @@
   file: path=~/.managed-dock state=touch
 
 - name: add apps
-  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --add {{ item }}"
+  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --add '{{ item }}'"
   ignore_errors: True
   with_items: apps
 
 - name: add folders
-  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --add {{ item.path }} --view {{ item.view|default('grid') }} --display {{ item.display|default('folder') }} --sort {{ item.sort|default('name') }}"
+  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --add '{{ item.path }}' --view {{ item.view|default('grid') }} --display {{ item.display|default('folder') }} --sort {{ item.sort|default('name') }}"
   ignore_errors: True
   with_items: folders
