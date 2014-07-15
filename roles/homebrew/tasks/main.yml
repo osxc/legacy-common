@@ -1,31 +1,34 @@
 ---
 # installs homebrew system-wide
-
-- name: clone homebrew
-  git: repo=https://github.com/Homebrew/homebrew.git dest={{ brew_repo_path }} update=no
-
+# let's stat some things and register some conditionals
 - name: assert new homebrew installation
-  command: test -e /usr/local/bin/brew
-  ignore_errors: True
+  stat: path={{ brew_install_path }}/bin/brew
   register: brew_installed
 
-- name: get old /usr/local
-  copy: src=/usr/local/ dest={{ brew_repo_path }} force=no
-  when: brew_installed|failed
+- name: clone homebrew if needed
+  git: "repo=https://github.com/Homebrew/homebrew dest={{ brew_repo_path }} update=no"
+  when: brew_installed.stat.exists == false
 
-- name: fix user acls
-  command: chmod -R +x {{ brew_repo_path }}/bin
-  when: brew_installed|failed
-
-- name: clean up /usr/local
+- name: copy {{ brew_install_path }} to {{ brew_repo_path }}
   sudo: True
-  command: rm -rf /usr/local
-  when: brew_installed|failed
+  synchronize: src={{ brew_install_path }}/ dest={{ brew_repo_path }} copy_links=yes
+  when: brew_installed.stat.exists == false
 
-- name: link the repo to the brew installation path
+- name: fix user acl on {{ brew_repo_path }} and clean up {{ brew_install_path }}
+  sudo: True
+  file: path={{ item.path }} state={{ item.state|default('directory') }}
+        owner={{ ansible_user_id }} group=staff mode=0755
+  with_items:
+    - { path: '{{ brew_repo_path }}' }
+    - { path: '{{ brew_repo_path }}/bin' }
+    - { path: '{{ brew_install_path }}' , state: 'absent' }
+  when: brew_installed.stat.exists == false
+
+- name: ensure {{ brew_repo_path }} is linked to the {{ brew_install_path }}
   sudo: True
   file: state=link src={{ brew_repo_path }} dest={{ brew_install_path }} owner={{ ansible_user_id }}
-  when: brew_installed|failed
+  when: brew_installed.stat.exists == false
 
 - name: update homebrew
   homebrew: update_homebrew=yes
+  when: brew_installed.stat.exists == true
