@@ -18,10 +18,10 @@ Roadmap
 -------
 
 1. Better roles (less destructive & more pluggable to the existing)
-2. Instead of storing every role in one repo: split it to have one role per repo and publish them to ansible galaxy.
+2. Instead of storing every role in one repo: split it to have one role per repo and publish them to ansible galaxy
 3. Update the install script to have:
   - A set of tools on the computer to manage the osxc installation: `osxc run/update/...`
   - A custom repository containing the custom user configuration
-  - Many ansible roles in /etc/ansible/roles.
+  - Many ansible roles in /etc/ansible/roles
 
-**Why ?** I want to tink that osxc is more of a set of tools instead of a standalone software. (i.e. I want this tools to be usable from any ansible playbook).
+**Why ?** I want to think that osxc is more of a set of tools instead of a standalone software. (i.e. I want these tools to be usable from any ansible playbook).
