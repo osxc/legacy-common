@@ -1,21 +1,18 @@
 ---
-# git clone a remote repo url to ~/src/github.com/*
+# git clone a remote repo url via ssh to ~/src/github.com/*
 # * = unless otherwise specified
 
-
-- include: "ssh.yml"
-  when: "remote_repo|search('ssh://')"
-  register: ssh_remote
-
-- name: clone {{ remote_repo }} to {{ local_repo }}
+- name: clone {{ remote_repo }} to {{ local_repo }} via ssh
   git: repo={{ remote_repo }} dest={{ local_repo }}
+       accept_hostkey={{ accept_hostkey }}
        bare={{ bare }}
        depth={{ depth }}
        executable={{ executable }}
        force={{ force }}
+       key_file={{ key_file }}
        recursive={{ recursive }}
        reference={{ reference }}
        remote={{ remote }}
+       ssh_opts={{ ssh_opts }}
        update={{ update }}
        version={{ version }}
-  when: "remote_repo|search('ssh://') == false"

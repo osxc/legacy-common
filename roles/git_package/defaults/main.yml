@@ -1,0 +1,19 @@
+---
+local_repo: "{{ ansible_env.HOME }}/src/github.com/{{ remote_repo|basename }}"
+remote_repo: "https://github.com/{{ ansible_user_id }}/xc-custom.git"
+
+bare: no
+depth: 0
+dest: "{{ local_repo }}"
+executable: /usr/bin/git
+force: yes
+recursive: yes
+reference: 
+remote: origin
+repo: "{{ remote_repo }}"
+update: yes
+version: HEAD
+# ssh only ones
+accept_hostkey: no
+key_file: None
+ssh_opts: None
