@@ -15,4 +15,4 @@ dependencies:
   - role: cask_package
     package_name: macvim
   - role: git_package
-    repo: github.com/square/maximum-awesome
+    remote_repo: github.com/square/maximum-awesome

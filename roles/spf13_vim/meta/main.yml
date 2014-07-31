@@ -1,6 +1,6 @@
 ---
 dependencies:
   - role: git_package
-    repo: github.com/spf13/spf13-vim
+    remote_repo: github.com/spf13/spf13-vim
   - role: git_package
-    repo: github.com/gmarik/vundle
+    remote_repo: github.com/gmarik/vundle
