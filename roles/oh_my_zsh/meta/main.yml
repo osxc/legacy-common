@@ -4,4 +4,4 @@ dependencies:
     package_name: zsh
   - role: git_package
     remote_repo: github.com/robbyrussell/oh-my-zsh
-    locate_repo: ~/src/github.com/robbyrussell/oh-my-zsh
+    local_repo: ~/src/github.com/robbyrussell/oh-my-zsh
