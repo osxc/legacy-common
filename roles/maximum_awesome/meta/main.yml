@@ -16,4 +16,4 @@ dependencies:
     package_name: macvim
   - role: git_package
     remote_repo: github.com/square/maximum-awesome
-    locate_repo: ~/src/github.com/square/maximum-awesome
+    local_repo: ~/src/github.com/square/maximum-awesome
