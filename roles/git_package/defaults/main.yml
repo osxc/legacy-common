@@ -1,6 +1,6 @@
 ---
 local_repo: "{{ ansible_env.HOME }}/src/github.com/{{ remote_repo|basename }}"
-remote_repo: "https://github.com/{{ ansible_user_id }}/xc-custom.git"
+remote_repo: "github.com/{{ ansible_user_id }}/xc-custom.git"
 
 bare: no
 depth: 0
