@@ -2,3 +2,4 @@
 dependencies:
   - role: git_package
     remote_repo: github.com/kcrawford/dockutil
+    locate_repo: ~/src/github.com/kcrawford/dockutil
