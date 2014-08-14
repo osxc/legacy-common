@@ -1,0 +1,8 @@
+---
+- name: install node
+  homebrew: name=node state=latest update_homebrew=no
+- name: install nvm
+  homebrew: name=nvm state=latest update_homebrew=no
+- name: install {{ version }}
+  shell: /bin/bash -lc 'nvm install {{ version }}'
+  when: version is defined
