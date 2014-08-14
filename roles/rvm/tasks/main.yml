@@ -1,0 +1,13 @@
+---
+- name: install autoconf
+  homebrew: name=autoconf state=latest update_homebrew=no
+- name: install automake
+  homebrew: name=automake state=latest update_homebrew=no
+- name: install libtool
+  homebrew: name=libtool state=latest update_homebrew=no
+- name: install gcc46
+  homebrew: name=gcc46 state=latest update_homebrew=no
+- name: install libyaml
+  homebrew: name=libyaml state=latest update_homebrew=no
+- name: install rvm
+  shell: "curl -sSL https://get.rvm.io | bash -s stable --ruby"
