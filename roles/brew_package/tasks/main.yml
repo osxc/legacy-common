@@ -7,8 +7,18 @@
 
 - name: install {{ package_name }}
   homebrew: name={{ package_name }} state=latest update_homebrew=no
-  when: brew_opts is not defined
+  when: package_name is defined and brew_opts is not defined
 
 - name: install {{ package_name }} with {{ brew_opts }}
   homebrew: name={{ package_name }} install_options={{ brew_opts }} state=latest update_homebrew=no
-  when: brew_opts is defined
+  when: package_name is defined and brew_opts is defined
+
+- name: install {{ item }}
+  homebrew: name={{ item }} state=latest update_homebrew=no
+  when: packages is defined and brew_opts is not defined
+  with_items: packages
+
+- name: install {{ item }} with {{ brew_opts }}
+  homebrew: name={{ item }} install_options={{ brew_opts }} state=latest update_homebrew=no
+  when: packages is defined and brew_opts is defined
+  with_items: packages
