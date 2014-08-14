@@ -1,3 +1,9 @@
 ---
 - name: install {{ package_name }}
-  pip: name={{ package_name }} state=latest
+  pip: name='{{ package_name }}' state=latest
+  when: package_name is defined
+
+- name: install {{ item.egg_name }}
+  shell: /usr/local/bin/pip install --user {{ item.address }}
+  with_items: vcs_eggs
+  when: vcs_eggs is defined

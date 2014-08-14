@@ -4,3 +4,4 @@
 
 - name: kill the dock
   command: killall Dock
+  ignore_errors: yes
