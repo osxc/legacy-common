@@ -1,0 +1,4 @@
+---
+dependencies:
+ - role: git_package
+   repo: github.com/osxc/xc-common
