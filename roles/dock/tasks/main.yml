@@ -8,7 +8,7 @@
   file: path=~/.managed-dock state=touch
 
 - name: add apps
-  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --add '{{ item }}'"
+  shell: "PYTHONIOENCODING=utf-8 {{ dockutil_exe }} --add '{{ item.path }}' --replacing '{{ item.name }}'"
   ignore_errors: True
   with_items: apps
 

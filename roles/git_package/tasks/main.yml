@@ -8,7 +8,7 @@
   register: ssh_remote
 
 - name: clone {{ remote_repo }} to {{ local_repo }}
-  git: repo=https://{{ remote_repo }} dest={{ local_repo }}
+  git: repo={{ remote_repo }} dest={{ local_repo }}
        bare={{ bare }}
        depth={{ depth }}
        executable={{ executable }}
